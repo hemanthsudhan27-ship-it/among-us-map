@@ -95,6 +95,12 @@ export function FloorMap({ floor }: FloorMapProps) {
             <rect x="-260" y="200" width="260" height="320" fill="none" stroke="#4a5568" strokeWidth="10" rx="20" />
             <text x="-130" y="370" fill="#1a202c" fontSize="48" fontWeight="900" textAnchor="middle" letterSpacing="5">C1</text>
 
+            {/* Small Room Next to C1 */}
+            <rect x="-230" y="540" width="200" height="200" fill="url(#metal-floor)" rx="15" />
+            <rect x="-230" y="540" width="200" height="200" fill="none" stroke="#2d3748" strokeWidth="20" rx="15" />
+            <rect x="-230" y="540" width="200" height="200" fill="none" stroke="#4a5568" strokeWidth="10" rx="15" />
+            <text x="-130" y="650" fill="#1a202c" fontSize="24" fontWeight="900" textAnchor="middle" letterSpacing="2">NEW</text>
+
             {/* C2 (Right Room) */}
             <rect x="1000" y="200" width="260" height="320" fill="url(#metal-floor)" rx="20" />
             <rect x="1000" y="200" width="260" height="320" fill="none" stroke="#2d3748" strokeWidth="30" rx="20" />
@@ -149,84 +155,111 @@ export function FloorMap({ floor }: FloorMapProps) {
 
         {floor === 2 && (
           <g id="floor-2-map" transform="translate(900, 350)">
-            {/* --- HULL / CORRIDORS --- */}
-            {/* An abstract ship hull bridging the components */}
+
+            {/* ==================== BASE HULL (corner room top-right + center column below) ==================== */}
+            {/* Full-width at top (corner room), then steps inward on right side going down */}
             <path
-              d="M 50 300 Q 50 200 150 200 L 750 200 Q 850 200 850 300 L 850 900 Q 850 1050 750 1050 L 150 1050 Q 50 1050 50 900 Z"
+              d="M 80 10 L 600 10 L 680 90 L 680 380 L 470 380 L 430 420 L 430 1010 L 390 1090 L 80 1090 L 10 1010 L 10 90 Z"
               fill="url(#corridor-floor)"
               stroke="#2d3748"
               strokeWidth="40"
-              strokeLinejoin="round"
+              strokeLinejoin="miter"
               filter="url(#wall-shadow)"
             />
             {/* Inner wall highlight */}
             <path
-              d="M 50 300 Q 50 200 150 200 L 750 200 Q 850 200 850 300 L 850 900 Q 850 1050 750 1050 L 150 1050 Q 50 1050 50 900 Z"
+              d="M 80 10 L 600 10 L 680 90 L 680 380 L 470 380 L 430 420 L 430 1010 L 390 1090 L 80 1090 L 10 1010 L 10 90 Z"
               fill="none"
               stroke="#4a5568"
               strokeWidth="10"
+              strokeLinejoin="miter"
+            />
+
+
+            {/* ==================== TOP-RIGHT VERTICAL WALL LINE ==================== */}
+            {/* Tall vertical wall on the far right side */}
+            <line x1="480" y1="0" x2="480" y2="400" stroke="#2d3748" strokeWidth="12" strokeLinecap="round" filter="url(#wall-shadow)" />
+
+
+            {/* ==================== C1 LABEL (far left) ==================== */}
+            <text x="-260" y="370" fill="#a0aec0" fontSize="32" fontWeight="900" letterSpacing="5">C1</text>
+
+            {/* ==================== LIBRARY LABEL (center-left floating) ==================== */}
+            <text x="240" y="420" fill="#e2e8f0" fontSize="28" fontWeight="700" letterSpacing="3" opacity="0.6">library</text>
+
+            {/* ==================== MAIN FLOOR (contains stairwell column) ==================== */}
+            {/* Drawn first so it sits behind all rooms, with thick stroke walls creating natural gaps */}
+            <rect x="205" y="440" width="200" height="500" fill="url(#corridor-floor)" rx="20" />
+            <rect x="205" y="440" width="200" height="500" fill="none" stroke="#2d3748" strokeWidth="35" rx="20" strokeLinejoin="round" filter="url(#wall-shadow)" />
+            <rect x="205" y="440" width="200" height="500" fill="none" stroke="#4a5568" strokeWidth="10" rx="20" strokeLinejoin="round" />
+
+            {/* ==================== CENTER COLUMN ==================== */}
+
+            {/* Top gray rectangle (above stairwell) */}
+            <rect x="220" y="470" width="160" height="130" fill="url(#metal-floor)" rx="15" />
+            <rect x="220" y="470" width="160" height="130" fill="none" stroke="#2d3748" strokeWidth="20" rx="15" />
+            <rect x="220" y="470" width="160" height="130" fill="none" stroke="#4a5568" strokeWidth="8" rx="15" />
+
+            {/* Stairwell room */}
+            <g transform="translate(215, 620)">
+              <rect x="0" y="0" width="170" height="185" fill="#718096" rx="10" />
+              <rect x="0" y="0" width="170" height="185" fill="none" stroke="#2d3748" strokeWidth="25" rx="10" />
+              <rect x="0" y="0" width="170" height="185" fill="none" stroke="#4a5568" strokeWidth="8" rx="10" />
+              {/* Stair grid lines with center divider */}
+              <rect x="15" y="15" width="140" height="130" fill="#4a5568" />
+              <line x1="85" y1="15" x2="85" y2="145" stroke="#1a202c" strokeWidth="7" />
+              <line x1="15" y1="40" x2="155" y2="40" stroke="#2d3748" strokeWidth="4" />
+              <line x1="15" y1="65" x2="155" y2="65" stroke="#2d3748" strokeWidth="4" />
+              <line x1="15" y1="90" x2="155" y2="90" stroke="#2d3748" strokeWidth="4" />
+              <line x1="15" y1="115" x2="155" y2="115" stroke="#2d3748" strokeWidth="4" />
+              {/* Yellow hazard landing */}
+              <rect x="5" y="145" width="160" height="30" fill="url(#hazard-stripes)" />
+            </g>
+
+            {/* Small rectangle below stairwell */}
+            <rect x="215" y="830" width="170" height="80" fill="url(#metal-floor)" rx="12" />
+            <rect x="215" y="830" width="170" height="80" fill="none" stroke="#2d3748" strokeWidth="20" rx="12" />
+            <rect x="215" y="830" width="170" height="80" fill="none" stroke="#4a5568" strokeWidth="8" rx="12" />
+
+            {/* ==================== LEFT OUTSIDE ROOMS (outside main hull, gap on left) ==================== */}
+            {/* C-shape shifted LEFT by -220, sits outside hull's left wall */}
+            <path
+              d="M -20 620 L -200 620 L -200 730 L -130 730 L -130 810 L -200 810 L -200 890 L -20 890 Z"
+              fill="url(#metal-floor)"
+              stroke="#2d3748"
+              strokeWidth="22"
+              strokeLinejoin="round"
+              filter="url(#wall-shadow)"
+            />
+            <path
+              d="M -20 620 L -200 620 L -200 730 L -130 730 L -130 810 L -200 810 L -200 890 L -20 890 Z"
+              fill="none"
+              stroke="#4a5568"
+              strokeWidth="8"
               strokeLinejoin="round"
             />
 
-            {/* Right-side external wing/corridor represented by the lines */}
-            <path d="M 850 200 L 950 200 L 950 400 L 850 400" fill="url(#metal-floor)" stroke="#2d3748" strokeWidth="20" strokeLinejoin="round" filter="url(#wall-shadow)" />
-            <path d="M 850 900 L 1100 900 L 1100 1100 L 850 1100" fill="url(#metal-floor)" stroke="#2d3748" strokeWidth="20" strokeLinejoin="round" filter="url(#wall-shadow)" />
+            {/* Dark gray box — outside hull, shifted left */}
+            <rect x="-200" y="890" width="130" height="95" fill="#4a5568" rx="10" />
+            <rect x="-200" y="890" width="130" height="95" fill="none" stroke="#2d3748" strokeWidth="20" rx="10" />
+            <rect x="-200" y="890" width="130" height="95" fill="none" stroke="#3a4a58" strokeWidth="7" rx="10" />
 
-            {/* --- ROOMS --- */}
-            {/* Library (Middle) */}
-            <rect x="250" y="300" width="280" height="200" fill="url(#library-floor)" rx="20" />
-            <rect x="250" y="300" width="280" height="200" fill="none" stroke="#2d3748" strokeWidth="30" rx="20" />
-            <rect x="250" y="300" width="280" height="200" fill="none" stroke="#4a5568" strokeWidth="10" rx="20" />
-            <text x="390" y="415" fill="#333" fontSize="40" fontWeight="900" textAnchor="middle" letterSpacing="5" style={{ textShadow: '0 2px 4px rgba(255,255,255,0.5)' }}>LIBRARY</text>
+            {/* Tiny vertical rectangle — outside hull, shifted left */}
+            <rect x="-130" y="985" width="60" height="90" fill="url(#metal-floor)" rx="8" />
+            <rect x="-130" y="985" width="60" height="90" fill="none" stroke="#2d3748" strokeWidth="18" rx="8" />
 
-            {/* Left Complex Shape (Engine / Systems Area) */}
-            <g transform="translate(40, 550)">
-              {/* Base floor area */}
-              <path d="M 0 0 L 160 0 L 160 80 L 110 80 L 110 160 L 160 160 L 160 290 L 240 290 L 240 400 L 140 400 L 140 290 L 40 290 L 40 240 L 0 240 Z" fill="url(#metal-floor)" />
-              {/* Outer stroke */}
-              <path d="M 0 0 L 160 0 L 160 80 L 110 80 L 110 160 L 160 160 L 160 290 L 240 290 L 240 400 L 140 400 L 140 290 L 40 290 L 40 240 L 0 240 Z" fill="none" stroke="#2d3748" strokeWidth="25" strokeLinejoin="round" />
-              <path d="M 0 0 L 160 0 L 160 80 L 110 80 L 110 160 L 160 160 L 160 290 L 240 290 L 240 400 L 140 400 L 140 290 L 40 290 L 40 240 L 0 240 Z" fill="none" stroke="#4a5568" strokeWidth="8" strokeLinejoin="round" />
+            {/* ==================== RIGHT SIDE ==================== */}
 
-              {/* Dark Engine Core */}
-              <rect x="40" y="240" width="100" height="50" fill="#1a202c" rx="5" />
-              <circle cx="90" cy="265" r="15" fill="#f56565" className="animate-pulse" />
-              <line x1="50" y1="265" x2="130" y2="265" stroke="#fc8181" strokeWidth="2" opacity="0.5" />
-            </g>
+            {/* ==================== RIGHT OUTSIDE ROOM (outside main hull, gap on right) ==================== */}
+            {/* Right rectangle shifted RIGHT by +280, sits outside hull's right wall */}
+            <rect x="720" y="700" width="165" height="165" fill="url(#metal-floor)" rx="15" />
+            <rect x="720" y="700" width="165" height="165" fill="none" stroke="#2d3748" strokeWidth="25" rx="15" />
+            <rect x="720" y="700" width="165" height="165" fill="none" stroke="#4a5568" strokeWidth="8" rx="15" />
 
-            {/* Stairwell Room */}
-            <g transform="translate(250, 550)">
-              {/* Box */}
-              <rect x="0" y="0" width="280" height="200" fill="#718096" rx="10" />
-              <rect x="0" y="0" width="280" height="200" fill="none" stroke="#2d3748" strokeWidth="30" rx="10" />
-              <rect x="0" y="0" width="280" height="200" fill="none" stroke="#4a5568" strokeWidth="10" rx="10" />
+            {/* Bottom-right corner lines — shifted right to follow the new rect position */}
+            <line x1="720" y1="865" x2="720" y2="1050" stroke="#2d3748" strokeWidth="12" strokeLinecap="round" filter="url(#wall-shadow)" />
+            <line x1="720" y1="960" x2="960" y2="960" stroke="#2d3748" strokeWidth="12" strokeLinecap="round" filter="url(#wall-shadow)" />
 
-              {/* Stairs */}
-              <rect x="30" y="20" width="220" height="120" fill="#4a5568" stroke="#1a202c" strokeWidth="5" />
-              <line x1="30" y1="50" x2="250" y2="50" stroke="#2d3748" strokeWidth="6" />
-              <line x1="30" y1="80" x2="250" y2="80" stroke="#2d3748" strokeWidth="6" />
-              <line x1="30" y1="110" x2="250" y2="110" stroke="#2d3748" strokeWidth="6" />
-              <line x1="140" y1="20" x2="140" y2="140" stroke="#1a202c" strokeWidth="10" />
-
-              {/* Landing Zone */}
-              <rect x="30" y="140" width="220" height="40" fill="url(#hazard-stripes)" stroke="#1a202c" strokeWidth="5" />
-            </g>
-
-            {/* Bottom Gray Box */}
-            <rect x="250" y="780" width="280" height="150" fill="url(#metal-floor)" rx="15" />
-            <rect x="250" y="780" width="280" height="150" fill="none" stroke="#2d3748" strokeWidth="30" rx="15" />
-            <rect x="250" y="780" width="280" height="150" fill="none" stroke="#4a5568" strokeWidth="10" rx="15" />
-            <circle cx="390" cy="855" r="40" fill="#2d3748" stroke="#1a202c" strokeWidth="5" />
-            <rect x="370" y="835" width="40" height="40" fill="#90cdf4" rx="5" />
-
-            {/* Right Gray Box (Storage/Security) */}
-            <rect x="600" y="650" width="220" height="220" fill="#4a5568" rx="20" />
-            <rect x="600" y="650" width="220" height="220" fill="none" stroke="#2d3748" strokeWidth="30" rx="20" />
-            <rect x="600" y="650" width="220" height="220" fill="none" stroke="#4a5568" strokeWidth="10" rx="20" />
-            {/* Computer Panels */}
-            <rect x="640" y="690" width="140" height="50" fill="#1a202c" stroke="#2d3748" strokeWidth="5" rx="5" />
-            <rect x="650" y="700" width="30" height="30" fill="#48bb78" />
-            <rect x="690" y="700" width="30" height="30" fill="#4299e1" />
-            <rect x="730" y="700" width="30" height="30" fill="#ed8936" />
           </g>
         )}
       </svg>
