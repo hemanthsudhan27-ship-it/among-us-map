@@ -4,7 +4,7 @@ export const initialTasks: Task[] = [
   // Floor 1 Tasks
   {
     id: 'f1-extra-room',
-    name: 'Check Storage (New Room)',
+    name: 'Throw',
     floor: 1,
     x: 770,
     y: 990,
@@ -12,7 +12,7 @@ export const initialTasks: Task[] = [
   },
   {
     id: 'f1-library',
-    name: 'Scan Documents (Library)',
+    name: 'Book Game',
     floor: 1,
     x: 1400,
     y: 470,
@@ -20,15 +20,23 @@ export const initialTasks: Task[] = [
   },
   {
     id: 'f1-mid-left',
-    name: 'Fix Wiring (Corridor)',
+    name: 'Arrange Colour',
     floor: 1,
-    x: 1100,
-    y: 880,
+    x: 1050,
+    y: 520,
+    completed: false,
+  },
+  {
+    id: 'f1-top-left-new',
+    name: 'table tennis',
+    floor: 1,
+    x: 950,
+    y: 560,
     completed: false,
   },
   {
     id: 'f1-bottom-left',
-    name: 'Clean Vent (Storage)',
+    name: 'Electeical Room',
     floor: 1,
     x: 1050,
     y: 1300,
@@ -36,13 +44,21 @@ export const initialTasks: Task[] = [
   },
   {
     id: 'f1-bottom-mid',
-    name: 'Empty Garbage (Hallway)',
+    name: 'Cleaning',
     floor: 1,
     x: 1400,
     y: 1320,
     completed: false,
   },
-  
+  {
+    id: 'f1-bottom-right-new',
+    name: 'qr game',
+    floor: 1,
+    x: 1600,
+    y: 1250,
+    completed: false,
+  },
+
   // Floor 2 Tasks
   {
     id: 'f2-above-library',

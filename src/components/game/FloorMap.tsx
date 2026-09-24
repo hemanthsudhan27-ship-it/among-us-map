@@ -105,7 +105,7 @@ export function FloorMap({ floor }: FloorMapProps) {
             <rect x="1000" y="200" width="260" height="320" fill="url(#metal-floor)" rx="20" />
             <rect x="1000" y="200" width="260" height="320" fill="none" stroke="#2d3748" strokeWidth="30" rx="20" />
             <rect x="1000" y="200" width="260" height="320" fill="none" stroke="#4a5568" strokeWidth="10" rx="20" />
-            <text x="1130" y="370" fill="#1a202c" fontSize="48" fontWeight="900" textAnchor="middle" letterSpacing="5">C2</text>
+            <text x="1130" y="370" fill="#1a202c" fontSize="48" fontWeight="900" textAnchor="middle" letterSpacing="5">(admin)</text>
 
             {/* Central Hub Box */}
             <rect x="380" y="250" width="240" height="220" fill="#52616b" rx="15" />
