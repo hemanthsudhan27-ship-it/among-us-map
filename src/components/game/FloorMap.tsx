@@ -156,39 +156,40 @@ export function FloorMap({ floor }: FloorMapProps) {
         {floor === 2 && (
           <g id="floor-2-map" transform="translate(900, 350)">
 
-            {/* ==================== BASE HULL (corner room top-right + center column below) ==================== */}
-            {/* Full-width at top (corner room), then steps inward on right side going down */}
+            {/* ==================== BASE HULL ==================== */}
+            {/* Single unified hull path:
+                - Starts at top-left of the main building (removed red top-extension)
+                - Extends right side down to include the GREEN area (merged right dark space)
+                - Has BLUE area merged in as a continuous left extension
+                All in one shape so pan/zoom work on the whole thing together */}
+            {/* RED SECTION REMOVED — hull now starts at y=380. No floor geometry exists above this line. */}
             <path
-              d="M 80 10 L 600 10 L 680 90 L 680 380 L 470 380 L 430 420 L 430 1010 L 390 1090 L 80 1090 L 10 1010 L 10 90 Z"
+              d="M 10 280 L 760 280 L 760 960 L 430 960 L 430 1010 L 390 1090 L 80 1090 L 10 1010 L 10 890 L -200 890 L -200 620 L 10 620 Z"
               fill="url(#corridor-floor)"
               stroke="#2d3748"
               strokeWidth="40"
-              strokeLinejoin="miter"
+              strokeLinejoin="round"
               filter="url(#wall-shadow)"
             />
             {/* Inner wall highlight */}
             <path
-              d="M 80 10 L 600 10 L 680 90 L 680 380 L 470 380 L 430 420 L 430 1010 L 390 1090 L 80 1090 L 10 1010 L 10 90 Z"
+              d="M 10 280 L 760 280 L 760 960 L 430 960 L 430 1010 L 390 1090 L 80 1090 L 10 1010 L 10 890 L -200 890 L -200 620 L 10 620 Z"
               fill="none"
               stroke="#4a5568"
               strokeWidth="10"
-              strokeLinejoin="miter"
+              strokeLinejoin="round"
             />
 
-
-            {/* ==================== TOP-RIGHT VERTICAL WALL LINE ==================== */}
-            {/* Tall vertical wall on the far right side */}
-            <line x1="480" y1="0" x2="480" y2="400" stroke="#2d3748" strokeWidth="12" strokeLinecap="round" filter="url(#wall-shadow)" />
-
+            {/* Interior divider wall: separates main column from the green right extension */}
+            <line x1="430" y1="420" x2="430" y2="960" stroke="#2d3748" strokeWidth="20" strokeLinecap="round" filter="url(#wall-shadow)" />
+            <line x1="430" y1="420" x2="430" y2="960" stroke="#4a5568" strokeWidth="6" strokeLinecap="round" />
 
             {/* ==================== C1 LABEL (far left) ==================== */}
-            <text x="-260" y="370" fill="#a0aec0" fontSize="32" fontWeight="900" letterSpacing="5">C1</text>
+            <text x="-130" y="780" fill="#a0aec0" fontSize="28" fontWeight="900" letterSpacing="4" textAnchor="middle">C1</text>
 
-            {/* ==================== LIBRARY LABEL (center-left floating) ==================== */}
-            <text x="240" y="420" fill="#e2e8f0" fontSize="28" fontWeight="700" letterSpacing="3" opacity="0.6">library</text>
+            {/* Library label and vertical partition wall were in the RED section — removed */}
 
-            {/* ==================== MAIN FLOOR (contains stairwell column) ==================== */}
-            {/* Drawn first so it sits behind all rooms, with thick stroke walls creating natural gaps */}
+            {/* ==================== MAIN FLOOR COLUMN (left sub-column, contains stairwell) ==================== */}
             <rect x="205" y="440" width="200" height="500" fill="url(#corridor-floor)" rx="20" />
             <rect x="205" y="440" width="200" height="500" fill="none" stroke="#2d3748" strokeWidth="35" rx="20" strokeLinejoin="round" filter="url(#wall-shadow)" />
             <rect x="205" y="440" width="200" height="500" fill="none" stroke="#4a5568" strokeWidth="10" rx="20" strokeLinejoin="round" />
@@ -221,44 +222,35 @@ export function FloorMap({ floor }: FloorMapProps) {
             <rect x="215" y="830" width="170" height="80" fill="none" stroke="#2d3748" strokeWidth="20" rx="12" />
             <rect x="215" y="830" width="170" height="80" fill="none" stroke="#4a5568" strokeWidth="8" rx="12" />
 
-            {/* ==================== LEFT OUTSIDE ROOMS (outside main hull, gap on left) ==================== */}
-            {/* C-shape shifted LEFT by -220, sits outside hull's left wall */}
+            {/* ==================== BLUE AREA — left outside rooms merged into continuous hull ==================== */}
+            {/* C-shaped wall detail on the left interior of the merged left extension */}
             <path
-              d="M -20 620 L -200 620 L -200 730 L -130 730 L -130 810 L -200 810 L -200 890 L -20 890 Z"
+              d="M -20 650 L -170 650 L -170 730 L -100 730 L -100 800 L -170 800 L -170 870 L -20 870 Z"
               fill="url(#metal-floor)"
               stroke="#2d3748"
-              strokeWidth="22"
+              strokeWidth="20"
               strokeLinejoin="round"
               filter="url(#wall-shadow)"
             />
             <path
-              d="M -20 620 L -200 620 L -200 730 L -130 730 L -130 810 L -200 810 L -200 890 L -20 890 Z"
+              d="M -20 650 L -170 650 L -170 730 L -100 730 L -100 800 L -170 800 L -170 870 L -20 870 Z"
               fill="none"
               stroke="#4a5568"
-              strokeWidth="8"
+              strokeWidth="7"
               strokeLinejoin="round"
             />
 
-            {/* Dark gray box — outside hull, shifted left */}
-            <rect x="-200" y="890" width="130" height="95" fill="#4a5568" rx="10" />
-            <rect x="-200" y="890" width="130" height="95" fill="none" stroke="#2d3748" strokeWidth="20" rx="10" />
-            <rect x="-200" y="890" width="130" height="95" fill="none" stroke="#3a4a58" strokeWidth="7" rx="10" />
+            {/* ==================== GREEN AREA — right extension floor details ==================== */}
+            {/* Right side room panel inside the merged green section */}
+            <rect x="470" y="700" width="260" height="165" fill="url(#metal-floor)" rx="15" />
+            <rect x="470" y="700" width="260" height="165" fill="none" stroke="#2d3748" strokeWidth="25" rx="15" />
+            <rect x="470" y="700" width="260" height="165" fill="none" stroke="#4a5568" strokeWidth="8" rx="15" />
 
-            {/* Tiny vertical rectangle — outside hull, shifted left */}
-            <rect x="-130" y="985" width="60" height="90" fill="url(#metal-floor)" rx="8" />
-            <rect x="-130" y="985" width="60" height="90" fill="none" stroke="#2d3748" strokeWidth="18" rx="8" />
-
-            {/* ==================== RIGHT SIDE ==================== */}
-
-            {/* ==================== RIGHT OUTSIDE ROOM (outside main hull, gap on right) ==================== */}
-            {/* Right rectangle shifted RIGHT by +280, sits outside hull's right wall */}
-            <rect x="720" y="700" width="165" height="165" fill="url(#metal-floor)" rx="15" />
-            <rect x="720" y="700" width="165" height="165" fill="none" stroke="#2d3748" strokeWidth="25" rx="15" />
-            <rect x="720" y="700" width="165" height="165" fill="none" stroke="#4a5568" strokeWidth="8" rx="15" />
-
-            {/* Bottom-right corner lines — shifted right to follow the new rect position */}
-            <line x1="720" y1="865" x2="720" y2="1050" stroke="#2d3748" strokeWidth="12" strokeLinecap="round" filter="url(#wall-shadow)" />
-            <line x1="720" y1="960" x2="960" y2="960" stroke="#2d3748" strokeWidth="12" strokeLinecap="round" filter="url(#wall-shadow)" />
+            {/* Decorative floor grate inside green area */}
+            <rect x="490" y="720" width="220" height="125" fill="#4a5568" rx="8" opacity="0.5" />
+            <line x1="490" y1="750" x2="710" y2="750" stroke="#2d3748" strokeWidth="4" />
+            <line x1="490" y1="782" x2="710" y2="782" stroke="#2d3748" strokeWidth="4" />
+            <line x1="490" y1="814" x2="710" y2="814" stroke="#2d3748" strokeWidth="4" />
 
           </g>
         )}

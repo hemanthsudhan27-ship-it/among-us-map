@@ -36,7 +36,7 @@ export const initialTasks: Task[] = [
   },
   {
     id: 'f1-bottom-left',
-    name: 'Electeical Room',
+    name: 'Find an object',
     floor: 1,
     x: 1050,
     y: 1300,
@@ -62,33 +62,44 @@ export const initialTasks: Task[] = [
   // Floor 2 Tasks
   {
     id: 'f2-above-library',
-    name: 'Upload Data',
+    name: 'solar counter',
     floor: 2,
     // Top gray rectangle center: local (300, 535) + translate(900,350) = (1200, 885)
     x: 1200,
     y: 885,
     completed: false,
   },
+  // (f2-top-right 'Calibrate Distributor' removed — was inside the deleted RED section)
   {
-    id: 'f2-top-right',
-    name: 'Calibrate Distributor',
+    id: 'f2-top-right-corner',
+    name: 'reactor game',
     floor: 2,
-    // Right of vertical wall line: local (610, 60) + translate(900,350) = (1510, 410)
-    x: 1510,
-    y: 410,
+    // Top-right corner of hull: local (700, 310) + translate(900,350) = world (1600, 660)
+    x: 1600,
+    y: 660,
     completed: false,
   },
   {
-    id: 'f2-mid-left-top',
-    name: 'Align Engine Output',
+    id: 'f2-puzzle-game',
+    name: 'puzzle game',
     floor: 2,
-    x: 760,
-    y: 1010,
+    x: 1450,
+    y: 660,
+    completed: false,
+  },
+
+  {
+    id: 'f2-stair-wire-game',
+    name: 'wire game',
+    floor: 2,
+    // Near yellow hazard strip of stairwell: stairwell at local(215,620)+hazard(y=765) + translate(900,350) = world (1210, 1115)
+    x: 1210,
+    y: 1115,
     completed: false,
   },
   {
     id: 'f2-mid-left-bottom',
-    name: 'Inspect Sample',
+    name: 'Potato race',
     floor: 2,
     x: 760,
     y: 1180,
@@ -96,7 +107,7 @@ export const initialTasks: Task[] = [
   },
   {
     id: 'f2-bottom-left-dark',
-    name: 'Unlock Manifolds',
+    name: 'Electrical Room',
     floor: 2,
     x: 760,
     y: 1240,
@@ -104,10 +115,11 @@ export const initialTasks: Task[] = [
   },
   {
     id: 'f2-bottom-mid',
-    name: 'Swipe Card',
+    name: 'stacking cup',
     floor: 2,
-    x: 770,
-    y: 1330,
+    // Slanted bottom-LEFT corner of hull: local (10,1010)→(80,1090) + translate(900,350) = world ~(945, 1400)
+    x: 945,
+    y: 1400,
     completed: false,
   }
 ];
